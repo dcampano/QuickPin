@@ -4,20 +4,32 @@ body {
   min-width:357px;
   overflow-x:hidden;
 }
+.tab {
+	cursor: default;
+	border: 1px solid #ffffff;
+	padding-left: 2px;
+}
+.tab:hover {
+	background: #ecf1f6;
+	border: 1px solid #ced9e4;
+}
+.favicon {
+	position: relative;
+	top: 2px;
+}
 
 img {
 }
 </style>
 <div id="content"></div>
-
 <script>
 
 chrome.tabs.query( { "pinned": true }, function(tabs) { 
 	console.log(tabs);
 	for(var i = 0; i < tabs.length; i++) {
 		var tab = tabs[i];
-		var div = $('<div>');
-		var img = $('<img>');
+		var div = $('<div class=\'tab\'>');
+		var img = $('<img class=\'favicon\'>');
 		img.attr("src", tab.favIconUrl);
 		div.append(img);
 		var titleAssist = cleanTitle(tab);
