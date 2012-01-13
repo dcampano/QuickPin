@@ -20,7 +20,8 @@ chrome.tabs.query( { "pinned": true }, function(tabs) {
 		var img = $('<img>');
 		img.attr("src", tab.favIconUrl);
 		div.append(img);
-		div.append(tab.title);
+		var titleAssist = cleanTitle(tab);
+		div.append("&nbsp;" + titleAssist);
 		div.attr("data-tab-id", tab.id);
 		div.click(function() {
 			var tabId = $(this).attr("data-tab-id");
@@ -30,5 +31,19 @@ chrome.tabs.query( { "pinned": true }, function(tabs) {
 	}
 
 });
+
+var cleanedTitles = [
+	{ title: 'Gmail', search: 'mail.google.com' },
+	{ title: 'Google Reader', search: 'google.com/reader' }
+];
+function cleanTitle(tab){
+	for(var i = 0; i < cleanedTitles.length; i++){
+		var cleanTitle = cleanedTitles[i];
+		if(tab.url.indexOf(cleanTitle.search, 0) != -1){
+			return cleanTitle.title;
+		}
+	}
+	return tab.title;
+}
 
 </script>
