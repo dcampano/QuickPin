@@ -6,11 +6,6 @@ body {
 }
 
 img {
-  margin:5px;
-  border:2px solid black;
-  vertical-align:middle;
-  width:75px;
-  height:75px;
 }
 </style>
 <div id="content"></div>
@@ -22,7 +17,10 @@ chrome.tabs.query( { "pinned": true }, function(tabs) {
 	for(var i = 0; i < tabs.length; i++) {
 		var tab = tabs[i];
 		var div = $('<div>');
-		div.html(tab.title);
+		var img = $('<img>');
+		img.attr("src", tab.favIconUrl);
+		div.append(img);
+		div.append(tab.title);
 		div.attr("data-tab-id", tab.id);
 		div.click(function() {
 			var tabId = $(this).attr("data-tab-id");
