@@ -1,0 +1,36 @@
+<script src="jquery-1.7.1.min.js" type="text/javascript"></script>
+<style>
+body {
+  min-width:357px;
+  overflow-x:hidden;
+}
+
+img {
+  margin:5px;
+  border:2px solid black;
+  vertical-align:middle;
+  width:75px;
+  height:75px;
+}
+</style>
+<div id="content"></div>
+
+<script>
+
+chrome.tabs.query( { "pinned": true }, function(tabs) { 
+	console.log(tabs);
+	for(var i = 0; i < tabs.length; i++) {
+		var tab = tabs[i];
+		var div = $('<div>');
+		div.html(tab.title);
+		div.attr("data-tab-id", tab.id);
+		div.click(function() {
+			var tabId = $(this).attr("data-tab-id");
+			chrome.tabs.update(parseInt(tabId), { "active": true });
+		});
+		$("#content").append(div);
+	}
+
+});
+
+</script>

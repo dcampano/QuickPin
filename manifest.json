@@ -1,0 +1,12 @@
+{
+  "name": "QuickPin",
+  "version": "1.0",
+  "description": "Quickly access tabs that you have pinned from any window",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "popup": "popup.html"
+  },
+  "permissions": [
+    "tabs"
+  ]
+}
