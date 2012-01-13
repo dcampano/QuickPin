@@ -1,13 +1,16 @@
 <script src="jquery-1.7.1.min.js" type="text/javascript"></script>
+<script src="cleanTitles.js?v=1" type="text/javascript"></script>
 <style>
 body {
-  min-width:357px;
+  min-width:250px;
   overflow-x:hidden;
 }
 .tab {
 	cursor: default;
 	border: 1px solid #ffffff;
 	padding-left: 2px;
+  font-family: 'Verdana';
+  font-size: 12px;
 }
 .tab:hover {
 	background: #ecf1f6;
@@ -16,6 +19,8 @@ body {
 .favicon {
 	position: relative;
 	top: 2px;
+	width: 16px;
+	height: 16px;
 }
 
 img {
@@ -44,16 +49,15 @@ chrome.tabs.query( { "pinned": true }, function(tabs) {
 
 });
 
-var cleanedTitles = [
-	{ title: 'Gmail', search: 'mail.google.com' },
-	{ title: 'Google Reader', search: 'google.com/reader' }
-];
 function cleanTitle(tab){
 	for(var i = 0; i < cleanedTitles.length; i++){
 		var cleanTitle = cleanedTitles[i];
 		if(tab.url.indexOf(cleanTitle.search, 0) != -1){
 			return cleanTitle.title;
 		}
+	}
+	if(tab.title.length > 28){
+		return tab.title.substring(0, 25) + '...';
 	}
 	return tab.title;
 }
